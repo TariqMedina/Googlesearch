@@ -36,7 +36,7 @@ io.on('connection', (client) => {
   });
   client.on('newSave', () => {
     console.log('Saved');
-    client.emit('saveNew');
+    client.broadcast.emit('saveNew');
     // setInterval(() => {
     //   client.emit('saveNew', new Date());
     // }, 1000);

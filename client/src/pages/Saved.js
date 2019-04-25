@@ -22,7 +22,7 @@ class Saved extends Component {
 
   componentDidMount() {
     this.loadBooks();
-    socket.on('saveNew', ()=> console.log("Test"))
+    socket.on('saveNew', this.loadBooks)
   }
   componentWillUnmount() {
     socket.off('saveNew');
