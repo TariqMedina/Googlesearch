@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
-import { subscribeToTimer } from '../utils/Socket';
+import { socket, subscribeToTimer } from '../utils/Socket';
 
 class Search extends Component {
   state = {
@@ -109,6 +109,7 @@ handleSave = (book) => {
     link: book.volumeInfo.infoLink
   })
     .then(res => {
+      socket.emit('newSave');
       var results = this.state.results;
       var myIndex = results.findIndex(x => x.id === book.id);
       console.log(myIndex)
@@ -118,6 +119,7 @@ handleSave = (book) => {
       })
     })
     .catch(err => console.log(err));
+    
 };
 
 render() {

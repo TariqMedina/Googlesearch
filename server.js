@@ -34,6 +34,10 @@ io.on('connection', (client) => {
       client.emit('timer', new Date());
     }, interval);
   });
+  client.on('newSave', () => {
+    console.log('Saved');
+    client.emit('saveNew');
+  });
   client.on("disconnect", () => {
     console.log("user disconnected");
   });
