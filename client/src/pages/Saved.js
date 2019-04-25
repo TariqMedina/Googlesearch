@@ -4,7 +4,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { socket, subscribeToTimer } from '../utils/Socket';
+import { savenew, socket, subscribeToTimer } from '../utils/Socket';
 
 class Saved extends Component {
   state = {
@@ -17,11 +17,12 @@ class Saved extends Component {
     subscribeToTimer((err, timestamp) => this.setState({
       timestamp
     }));
+    savenew();
   }
 
   componentDidMount() {
     this.loadBooks();
-    socket.on('saveNew', () => alert("This"))
+    socket.on('saveNew', ()=> console.log("Test"))
   }
   componentWillUnmount() {
     socket.off('saveNew');

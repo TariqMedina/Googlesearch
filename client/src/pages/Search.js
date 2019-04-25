@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
-import { socket, subscribeToTimer } from '../utils/Socket';
+import { socket, subscribeToTimer, savenew } from '../utils/Socket';
 
 class Search extends Component {
   state = {
@@ -21,10 +21,12 @@ class Search extends Component {
     subscribeToTimer((err, timestamp) => this.setState({
       timestamp
     }));
+    savenew();
   }
 
   componentDidMount() {
     this.loadBooks();
+    socket.on('saveNew', ()=> console.log("Test"));
   }
 
   loadBooks = () => {
@@ -109,7 +111,7 @@ handleSave = (book) => {
     link: book.volumeInfo.infoLink
   })
     .then(res => {
-      socket.emit('newSave');
+      socket.emit('newSave', 1000);
       var results = this.state.results;
       var myIndex = results.findIndex(x => x.id === book.id);
       console.log(myIndex)

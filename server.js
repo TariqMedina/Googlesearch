@@ -37,6 +37,9 @@ io.on('connection', (client) => {
   client.on('newSave', () => {
     console.log('Saved');
     client.emit('saveNew');
+    // setInterval(() => {
+    //   client.emit('saveNew', new Date());
+    // }, 1000);
   });
   client.on("disconnect", () => {
     console.log("user disconnected");
